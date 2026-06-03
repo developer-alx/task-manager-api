@@ -14,6 +14,7 @@ function authMiddleware(request, response, next) {
     try {
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
         request.userId = String(decoded.userId);
+        request.userRole = decoded.role;
         return next();
     }
     catch {

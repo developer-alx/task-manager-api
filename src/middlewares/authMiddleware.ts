@@ -6,6 +6,7 @@ declare global {
   namespace Express {
     interface Request {
       userId?: string;
+      userRole?: string;
     }
   }
 }
@@ -30,6 +31,7 @@ export function authMiddleware(
     ) as DecodedToken;
 
     request.userId = String(decoded.userId);
+    request.userRole = decoded.role;
 
     return next();
   } catch {

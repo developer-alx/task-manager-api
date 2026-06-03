@@ -20,6 +20,7 @@ class CreateUserService {
             name,
             email,
             password: hashedPassword,
+            role: "user"
         });
         return {
             id: user.id,

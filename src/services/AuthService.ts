@@ -28,7 +28,7 @@ export class AuthService {
     }
 
     const accessToken = jwt.sign(
-      { userId: user.id },
+      { userId: user.id, role: user.role },
       process.env.JWT_SECRET as string,
       {
         expiresIn: process.env.ACCESS_TOKEN_EXPIRES as jwt.SignOptions["expiresIn"]
@@ -36,7 +36,7 @@ export class AuthService {
     );
 
     const refreshToken = jwt.sign(
-      { userId: user.id },
+      { userId: user.id, role: user.role },
       process.env.JWT_REFRESH_SECRET as string,
       {
         expiresIn: process.env.REFRESH_TOKEN_EXPIRES as jwt.SignOptions["expiresIn"]

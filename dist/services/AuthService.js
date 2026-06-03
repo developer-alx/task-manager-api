@@ -20,10 +20,10 @@ class AuthService {
         if (!passwordMatch) {
             throw new Error("Invalid credentials");
         }
-        const accessToken = jsonwebtoken_1.default.sign({ userId: user.id }, process.env.JWT_SECRET, {
+        const accessToken = jsonwebtoken_1.default.sign({ userId: user.id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRES
         });
-        const refreshToken = jsonwebtoken_1.default.sign({ userId: user.id }, process.env.JWT_REFRESH_SECRET, {
+        const refreshToken = jsonwebtoken_1.default.sign({ userId: user.id, role: user.role }, process.env.JWT_REFRESH_SECRET, {
             expiresIn: process.env.REFRESH_TOKEN_EXPIRES
         });
         const expiresAt = new Date();

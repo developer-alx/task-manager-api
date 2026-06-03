@@ -4,19 +4,19 @@ exports.UserRepository = void 0;
 const database_1 = require("../database");
 // Responsável por comunicação direta com o banco.
 class UserRepository {
-    async create({ name, email, password }) {
+    async create({ name, email, password, role }) {
         const query = `
-      INSERT INTO users (name, email, password)
-      VALUES ($1, $2, $3)
-      RETURNING *
+      INSERT INTO users (name, email, password, role)
+      VALUES ($1, $2, $3, $4)
+      RETURNING id, name, email, password, role, created_at, updated_at
     `;
-        const values = [name, email, password];
+        const values = [name, email, password, role ?? "user"];
         const { rows } = await database_1.pool.query(query, values);
         return rows[0];
     }
     async findByEmail(email) {
         const query = `
-      SELECT * FROM users
+      SELECT id, name, email, password, role, created_at, updated_at FROM users
       WHERE email = $1
     `;
         const { rows } = await database_1.pool.query(query, [email]);
@@ -24,7 +24,7 @@ class UserRepository {
     }
     async findById(id) {
         const query = `
-      SELECT * FROM users
+      SELECT id, name, email, password, role, created_at, updated_at FROM users
       WHERE id = $1
     `;
         const { rows } = await database_1.pool.query(query, [id]);
@@ -32,7 +32,7 @@ class UserRepository {
     }
     async findAll() {
         const query = `
-      SELECT * FROM users
+      SELECT id, name, email, role, created_at, updated_at FROM users
       ORDER BY id
     `;
         const { rows } = await database_1.pool.query(query);

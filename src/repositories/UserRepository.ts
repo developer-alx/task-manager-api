@@ -4,6 +4,7 @@ interface CreateUserDTO {
   name: string;
   email: string;
   password: string;
+  role?: string;
 }
 
 interface UpdateUserDTO {
@@ -13,14 +14,14 @@ interface UpdateUserDTO {
 
 // Responsável por comunicação direta com o banco.
 export class UserRepository {
-  async create({ name, email, password }: CreateUserDTO) {
+  async create({ name, email, password, role }: CreateUserDTO) {
     const query = `
-      INSERT INTO users (name, email, password)
-      VALUES ($1, $2, $3)
-      RETURNING *
+      INSERT INTO users (name, email, password, role)
+      VALUES ($1, $2, $3, $4)
+      RETURNING id, name, email, password, role, created_at, updated_at
     `;
 
-    const values = [name, email, password];
+    const values = [name, email, password, role ?? "user"];
 
     const { rows } = await pool.query(query, values);
 
@@ -29,7 +30,7 @@ export class UserRepository {
 
   async findByEmail(email: string) {
     const query = `
-      SELECT * FROM users
+      SELECT id, name, email, password, role, created_at, updated_at FROM users
       WHERE email = $1
     `;
 
@@ -40,7 +41,7 @@ export class UserRepository {
 
   async findById(id: number) {
     const query = `
-      SELECT * FROM users
+      SELECT id, name, email, password, role, created_at, updated_at FROM users
       WHERE id = $1
     `;
 
@@ -51,7 +52,7 @@ export class UserRepository {
 
   async findAll() {
     const query = `
-      SELECT * FROM users
+      SELECT id, name, email, role, created_at, updated_at FROM users
       ORDER BY id
     `;
 
