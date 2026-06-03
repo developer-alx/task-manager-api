@@ -18,7 +18,7 @@ export class UserRepository {
     const query = `
       INSERT INTO users (name, email, password, role)
       VALUES ($1, $2, $3, $4)
-      RETURNING id, name, email, password, role, created_at, updated_at
+      RETURNING id, name, email, password, role, created_at
     `;
 
     const values = [name, email, password, role ?? "user"];
@@ -30,7 +30,7 @@ export class UserRepository {
 
   async findByEmail(email: string) {
     const query = `
-      SELECT id, name, email, password, role, created_at, updated_at FROM users
+      SELECT id, name, email, password, role, created_at FROM users
       WHERE email = $1
     `;
 
@@ -41,7 +41,7 @@ export class UserRepository {
 
   async findById(id: number) {
     const query = `
-      SELECT id, name, email, password, role, created_at, updated_at FROM users
+      SELECT id, name, email, password, role, created_at FROM users
       WHERE id = $1
     `;
 
@@ -52,8 +52,8 @@ export class UserRepository {
 
   async findAll() {
     const query = `
-      SELECT id, name, email, role, created_at, updated_at FROM users
-      ORDER BY id
+     SELECT id, name, email, role, created_at FROM users
+     ORDER BY id
     `;
 
     const { rows } = await pool.query(query);

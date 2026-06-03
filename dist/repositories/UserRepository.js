@@ -8,7 +8,7 @@ class UserRepository {
         const query = `
       INSERT INTO users (name, email, password, role)
       VALUES ($1, $2, $3, $4)
-      RETURNING id, name, email, password, role, created_at, updated_at
+      RETURNING id, name, email, password, role, created_at
     `;
         const values = [name, email, password, role ?? "user"];
         const { rows } = await database_1.pool.query(query, values);
@@ -16,7 +16,7 @@ class UserRepository {
     }
     async findByEmail(email) {
         const query = `
-      SELECT id, name, email, password, role, created_at, updated_at FROM users
+      SELECT id, name, email, password, role, created_at FROM users
       WHERE email = $1
     `;
         const { rows } = await database_1.pool.query(query, [email]);
@@ -24,7 +24,7 @@ class UserRepository {
     }
     async findById(id) {
         const query = `
-      SELECT id, name, email, password, role, created_at, updated_at FROM users
+      SELECT id, name, email, password, role, created_at FROM users
       WHERE id = $1
     `;
         const { rows } = await database_1.pool.query(query, [id]);
@@ -32,8 +32,8 @@ class UserRepository {
     }
     async findAll() {
         const query = `
-      SELECT id, name, email, role, created_at, updated_at FROM users
-      ORDER BY id
+     SELECT id, name, email, role, created_at FROM users
+     ORDER BY id
     `;
         const { rows } = await database_1.pool.query(query);
         return rows;

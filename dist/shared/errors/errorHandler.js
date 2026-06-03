@@ -13,7 +13,8 @@ function errorHandler(err, request, response, next) {
             message: err.message
         });
     }
-    logger_1.default.error(err);
+    console.error(err);
+    // logger.error(err)
     return response.status(500).json({
         message: "Internal server error"
     });
