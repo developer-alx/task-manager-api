@@ -15,8 +15,8 @@ description: "Task list for User Authorization RBAC feature implementation in tw
 
 **Purpose**: Prepare database to support role-based access control
 
-- [ ] T001 Create migration to add `role` column to `users` table in `migrations/<timestamp>_add-role-to-users.js`
-- [ ] T002 Apply migration with `npm run migrate:up` and verify column exists with default `'user'`
+- [X] T001 Create migration to add `role` column to `users` table in `migrations/<timestamp>_add-role-to-users.js`
+- [X] T002 Apply migration with `npm run migrate:up` and verify column exists with default `'user'`
 
 ---
 
@@ -30,17 +30,17 @@ description: "Task list for User Authorization RBAC feature implementation in tw
 
 ### Implementation
 
-- [ ] T003 [P] Update `UserRepository` to include `role` in `SELECT` and `RETURNING` statements in `src/repositories/UserRepository.ts`
-- [ ] T004 [P] Update `CreateUserService` to set default `role = 'user'` in `src/services/CreateUserService.ts` (do not allow `role` from API request body)
-- [ ] T005 [P] Update `AuthService` to include `role` in JWT payload for both `accessToken` and `refreshToken` in `src/services/AuthService.ts`
-- [ ] T006 [P] Verify `AuthController` response includes `user.role` in `src/controllers/AuthController.ts` (may need no changes if already returning full user object)
-- [ ] T007 Verify `authMiddleware` populates `request.user.role` from JWT payload in `src/middlewares/authMiddleware.ts` (update if needed to extract role from token)
+- [X] T003 [P] Update `UserRepository` to include `role` in `SELECT` and `RETURNING` statements in `src/repositories/UserRepository.ts`
+- [X] T004 [P] Update `CreateUserService` to set default `role = 'user'` in `src/services/CreateUserService.ts` (do not allow `role` from API request body)
+- [X] T005 [P] Update `AuthService` to include `role` in JWT payload for both `accessToken` and `refreshToken` in `src/services/AuthService.ts`
+- [X] T006 [P] Verify `AuthController` response includes `user.role` in `src/controllers/AuthController.ts` (may need no changes if already returning full user object)
+- [X] T007 Verify `authMiddleware` populates `request.user.role` from JWT payload in `src/middlewares/authMiddleware.ts` (update if needed to extract role from token)
 
 ### Tests for First Delivery
 
-- [ ] T008 [P] Create integration test for role persistence in `src/tests/rbac.integration.test.ts`: create user, verify user has `role: 'user'` in database
-- [ ] T009 [P] Create integration test for JWT role payload: login, decode `accessToken`, verify `role` claim is present
-- [ ] T010 Verify existing login and user creation tests still pass: `npm test -- --runInBand` (database override: `DB_HOST=localhost`)
+- [X] T008 [P] Create integration test for role persistence in `src/tests/rbac.integration.test.ts`: create user, verify user has `role: 'user'` in database
+- [X] T009 [P] Create integration test for JWT role payload: login, decode `accessToken`, verify `role` claim is present
+- [X] T010 Verify existing login and user creation tests still pass: `npm test -- --runInBand` (database override: `DB_HOST=localhost`)
 
 ---
 
