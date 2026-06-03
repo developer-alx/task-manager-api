@@ -1,50 +1,78 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: none → 1.0.0
+- Modified principles: placeholder template → five concrete principles
+- Added sections: Database Governance, Development Workflow
+- Removed sections: none
+- Templates requiring updates: ✅ .specify/templates/plan-template.md, ✅ .specify/templates/spec-template.md, ✅ .specify/templates/tasks-template.md
+- Follow-up TODOs: none
+-->
+
+# Task Manager API Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Arquitetura em Camadas
+Todas as funcionalidades devem seguir o fluxo: Routes → Controller → Service → Repository → Database.
+Os Controllers não podem acessar o banco de dados diretamente.
+Esta separação preserva clareza, testabilidade e reduz o acoplamento entre o transporte HTTP e a lógica de persistência.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Responsabilidade Única
+Cada camada tem uma responsabilidade principal:
+- Routes definem endpoints e roteiam requisições.
+- Controllers tratam entrada e saída HTTP.
+- Services implementam regras de negócio.
+- Repositories acessam dados.
+- Database é responsável pela persistência física.
+Esta disciplina evita responsabilidades misturadas e facilita refatorações seguras.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Evolução Orientada por Features
+Toda nova funcionalidade deve ser desenvolvida em etapas ordenadas:
+1. Definir a necessidade.
+2. Criar ou atualizar migration quando necessário.
+3. Implementar o Repository.
+4. Implementar o Service.
+5. Implementar o Controller.
+6. Registrar a rota.
+7. Buildar a aplicação.
+8. Rebuildar os containers.
+9. Testar via Insomnia.
+10. Atualizar a documentação.
+Esse fluxo garante evolução incremental validada e reduz o risco de mudanças grandes sem controle.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Segurança de API
+Rotas protegidas devem utilizar JWT por meio do `authMiddleware`.
+Senhas e campos sensíveis nunca devem ser retornados em respostas da API.
+Operações de atualização e remoção exigem regras explícitas de autorização antes de serem implementadas.
+A segurança deve ser parte da arquitetura desde o início, não uma correção posterior.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Validação e Documentação Obrigatórias
+Nenhuma alteração é considerada concluída sem validação de build e implantação local.
+O README deve refletir o estado atual da arquitetura do projeto.
+Decisões arquiteturais relevantes devem ser registradas e documentadas.
+A qualidade e consistência arquitetural são prioridades acima da velocidade de implementação.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Database Governance
+Toda alteração estrutural de banco de dados deve ser realizada via migrations usando `node-pg-migrate`.
+Alterações manuais diretas no banco de dados devem ser evitadas.
+O schema deve ser versionado e reproduzível a partir do código-fonte.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+O fluxo mínimo obrigatório de validação é:
+- `npm run build`
+- `docker compose down`
+- `docker compose build --no-cache`
+- `docker compose up -d`
+Após o deploy local, validar:
+- endpoint no Insomnia;
+- logs da aplicação;
+- comportamento esperado da funcionalidade.
+Implementar uma funcionalidade por vez e validar cada etapa antes de avançar.
+Evitar alterações grandes sem testes intermediários.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+Esta Constituição orienta as práticas do projeto e tem prioridade sobre convenções implícitas.
+Alterações no processo ou princípios devem ser documentadas e justificadas claramente.
+Revisões devem verificar conformidade com a arquitetura em camadas, responsabilidade única, disciplina de migrations, segurança e documentação atualizada.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-05-31 | **Last Amended**: 2026-05-31
