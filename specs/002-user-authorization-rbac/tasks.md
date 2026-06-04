@@ -71,15 +71,15 @@ description: "Task list for User Authorization RBAC feature implementation in tw
 
 ### Tests for Second Delivery
 
-- [ ] T018 [P] Integration test: authenticated user with `role: 'user'` requests `GET /users` → expects `403` in `src/tests/rbac.integration.test.ts`
-- [ ] T019 [P] Integration test: authenticated user with `role: 'admin'` requests `GET /users` → expects `200` with user list
-- [ ] T020 [P] Integration test: user updates own profile (`PUT /users/:id` where `id` is their own ID) → expects `200`
-- [ ] T021 [P] Integration test: user attempts to update another user (`PUT /users/:id` where `id` is different user) → expects `403`
-- [ ] T022 [P] Integration test: user deletes own account (`DELETE /users/:id` where `id` is their own ID) → expects `200`
-- [ ] T023 [P] Integration test: user attempts to delete another user (`DELETE /users/:id` where `id` is different user) → expects `403`
-- [ ] T024 Integration test: admin updates any user → expects `200`
-- [ ] T025 Integration test: admin deletes any user → expects `200`
-- [ ] T026 Integration test: `GET /users/me` continues to work for both `role: 'user'` and `role: 'admin'` → expects `200` with authenticated user profile
+- [X] T018 [P] Integration test: authenticated user with `role: 'user'` requests `GET /users` → expects `403` in `src/tests/rbac.integration.test.ts`
+- [X] T019 [P] Integration test: authenticated user with `role: 'admin'` requests `GET /users` → expects `200` with user list
+- [X] T020 [P] Integration test: user updates own profile (`PUT /users/:id` where `id` is their own ID) → expects `200`
+- [X] T021 [P] Integration test: user attempts to update another user (`PUT /users/:id` where `id` is different user) → expects `403`
+- [X] T022 [P] Integration test: user deletes own account (`DELETE /users/:id` where `id` is their own ID) → expects `200`
+- [X] T023 [P] Integration test: user attempts to delete another user (`DELETE /users/:id` where `id` is different user) → expects `403`
+- [X] T024 Integration test: admin updates any user → expects `200`
+- [X] T025 Integration test: admin deletes any user → expects `200`
+- [X] T026 Integration test: `GET /users/me` continues to work for both `role: 'user'` and `role: 'admin'` → expects `200` with authenticated user profile
 
 ---
 
@@ -87,10 +87,10 @@ description: "Task list for User Authorization RBAC feature implementation in tw
 
 **Purpose**: Cross-cutting improvements and full test coverage
 
-- [ ] T027 Run complete test suite with `DB_HOST=localhost npm test -- --runInBand` and ensure all tests pass
-- [ ] T028 Manually test login flow to confirm JWT payload includes role (e.g., decode token and inspect claims)
-- [ ] T029 Manually test authorization rejection by attempting unauthorized requests and verifying `403` responses
-- [ ] T030 Update `specs/002-user-authorization-rbac/spec.md` implementation status to completed
+- [X] T027 Run complete test suite with `DB_HOST=localhost npm test -- --runInBand` and ensure all tests pass
+- [x] T028 Manually test login flow to confirm JWT payload includes role (e.g., decode token and inspect claims)
+- [X] T029 Manually test authorization rejection by attempting unauthorized requests and verifying `403` responses
+- [X] T030 Update `specs/002-user-authorization-rbac/spec.md` implementation status to completed
 - [ ] T031 Add notes to `.github/copilot-instructions.md` documenting RBAC implementation (optional)
 
 ---

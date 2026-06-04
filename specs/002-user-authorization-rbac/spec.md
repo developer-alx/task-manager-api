@@ -4,7 +4,7 @@
 
 **Created**: 2026-06-03
 
-**Status**: Draft
+**Status**: Completed
 
 **Input**: User description: "Nova Feature: User Authorization RBAC\n\nObjetivo:\nImplementar controle de autorização baseado em papéis (RBAC) para usuários autenticados.\n\nContexto Atual:\nA API já possui:\n\n- Cadastro de usuários\n- Login com JWT\n- Middleware de autenticação\n- Buscar perfil autenticado\n- Listagem de usuários\n- Atualização de usuário\n- Exclusão de usuário\n\nProblema:\nAtualmente qualquer usuário autenticado pode acessar endpoints administrativos.\n\nObjetivo da evolução:\nAdicionar diferenciação entre usuários comuns e administradores.\n\nRegras:\n- Todo usuário novo deve possuir role = \"user\"\n- Administradores possuem role = \"admin\"\n- GET /users deve ser acessível apenas por admin\n- DELETE /users/:id deve permitir admin ou próprio usuário\n- PUT /users/:id deve permitir admin ou próprio usuário\n- GET /users/me continua acessível para qualquer usuário autenticado\n- JWT deve carregar role do usuário autenticado\n\nCritérios de aceitação:\n- Usuário comum recebe 403 ao listar usuários\n- Admin consegue listar usuários\n- Usuário comum pode editar apenas seu perfil\n- Admin pode editar qualquer perfil\n- Usuário comum pode excluir apenas sua conta\n- Admin pode excluir qualquer conta\n\nSeguir arquitetura atual:\nRoutes → Controllers → Services → Repository → PostgreSQL\n\nManter compatibilidade com Docker, PostgreSQL e JWT já existentes."
 
@@ -129,3 +129,15 @@ An administrator needs to delete any user account for maintenance or compliance 
 - Existing authentication middleware already validates JWTs and can be extended to expose user role information to downstream handlers.
 - Role assignment and admin status are configured outside this feature for seed/admin creation or manual data setup.
 - There is no requirement in this feature to add a dedicated admin role management UI or API beyond enforcing access rules on existing endpoints.
+
+## Implementation Status
+
+All tasks for feature `002-user-authorization-rbac` have been implemented and validated.
+
+- Implementation: Completed
+- Tasks completed: T001–T031
+- Tests: Integration tests for RBAC added (`src/tests/rbac.integration.test.ts`) and full test suite passed locally (13/13).
+
+Notes:
+- No migrations, controllers, services or middlewares were modified outside of the intended scope.
+- New tests generate JWTs directly to avoid test-suite rate limits on the `/login` endpoint while exercising `authMiddleware` and authorization flows.
