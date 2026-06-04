@@ -13,8 +13,8 @@
 - [X] T006 [P] Implement `update(id: number, data)` in src/repositories/UserRepository.ts
 - [x] T007 [P] Implement `delete(id: number)` in src/repositories/UserRepository.ts (decide soft vs hard delete)
 - [X] T008 Add `src/modules/users/dto/UpdateUserDTO.ts` and export validation schema for controllers/services
-- [ ] T009 Ensure `authMiddleware` is exported and usable from src/middlewares/authMiddleware.ts
-- [ ] T010 Add unit tests for repository methods in src/tests/repositories/userRepository.test.ts
+- [X] T009 Ensure `authMiddleware` is exported and usable from src/middlewares/authMiddleware.ts
+- [X] T010 Add unit tests for repository methods in src/tests/repositories/userRepository.test.ts
 
 ## Phase 3: User Story 1 - Authenticated user views own profile (Priority: P1)
 

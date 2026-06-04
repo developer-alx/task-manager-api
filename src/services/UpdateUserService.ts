@@ -25,7 +25,6 @@ export class UpdateUserService {
       email: updatedUser.email,
       role: updatedUser.role,
       created_at: updatedUser.created_at,
-      updated_at: updatedUser.updated_at,
     };
   }
 }

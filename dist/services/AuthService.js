@@ -30,7 +30,13 @@ class AuthService {
         expiresAt.setDate(expiresAt.getDate() + 7);
         await refreshRepository.create(user.id, refreshToken, expiresAt);
         return {
-            user,
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                created_at: user.created_at
+            },
             accessToken,
             refreshToken
         };
