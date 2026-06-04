@@ -3,10 +3,17 @@ import { AppError } from "../shared/errors/AppError";
 
 interface DeleteUserServiceDTO {
   id: number;
+  authenticatedUserId: number;
+  authenticatedUserRole: string;
 }
 
 export class DeleteUserService {
-  async execute({ id }: DeleteUserServiceDTO) {
+  async execute({ id, authenticatedUserId, authenticatedUserRole }: DeleteUserServiceDTO) {
+    // Checagem defensiva: verifica se é owner ou admin
+    if (authenticatedUserRole !== "admin" && authenticatedUserId !== id) {
+      throw new AppError("Permission denied", 403);
+    }
+
     const userRepository = new UserRepository();
 
     const user = await userRepository.findById(id);

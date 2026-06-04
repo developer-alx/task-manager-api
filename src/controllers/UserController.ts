@@ -63,11 +63,20 @@ export class UserController {
       throw new AppError("Invalid user id", 400);
     }
 
+    if (!request.userId) {
+      throw new AppError("User not authenticated", 401);
+    }
+
     const data = UpdateUserSchema.parse(request.body);
 
     const updateUserService = new UpdateUserService();
 
-    const user = await updateUserService.execute({ id: userId, data });
+    const user = await updateUserService.execute({
+      id: userId,
+      data,
+      authenticatedUserId: Number(request.userId),
+      authenticatedUserRole: request.userRole || "user"
+    });
 
     return response.json(user);
   }
@@ -79,9 +88,17 @@ export class UserController {
       throw new AppError("Invalid user id", 400);
     }
 
+    if (!request.userId) {
+      throw new AppError("User not authenticated", 401);
+    }
+
     const deleteUserService = new DeleteUserService();
 
-    const deleted = await deleteUserService.execute({ id: userId });
+    const deleted = await deleteUserService.execute({
+      id: userId,
+      authenticatedUserId: Number(request.userId),
+      authenticatedUserRole: request.userRole || "user"
+    });
 
     return response.status(200).json(deleted);
   }

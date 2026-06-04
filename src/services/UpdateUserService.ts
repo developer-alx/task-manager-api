@@ -5,10 +5,17 @@ import { UpdateUserDTO } from "../modules/users/dto/UpdateUserDTO";
 interface UpdateUserServiceDTO {
   id: number;
   data: UpdateUserDTO;
+  authenticatedUserId: number;
+  authenticatedUserRole: string;
 }
 
 export class UpdateUserService {
-  async execute({ id, data }: UpdateUserServiceDTO) {
+  async execute({ id, data, authenticatedUserId, authenticatedUserRole }: UpdateUserServiceDTO) {
+    // Checagem defensiva: verifica se é owner ou admin
+    if (authenticatedUserRole !== "admin" && authenticatedUserId !== id) {
+      throw new AppError("Permission denied", 403);
+    }
+
     const userRepository = new UserRepository();
 
     const user = await userRepository.findById(id);

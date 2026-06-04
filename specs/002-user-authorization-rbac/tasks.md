@@ -66,8 +66,8 @@ description: "Task list for User Authorization RBAC feature implementation in tw
 
 ### Part C: Defensive Validation in Services
 
-- [ ] T016 [P] Add defensive authorization check in `UpdateUserService` to verify owner or admin before allowing update in `src/services/UpdateUserService.ts`
-- [ ] T017 [P] Add defensive authorization check in `DeleteUserService` to verify owner or admin before allowing delete in `src/services/DeleteUserService.ts`
+- [X] T016 [P] Add defensive authorization check in `UpdateUserService` to verify owner or admin before allowing update in `src/services/UpdateUserService.ts`
+- [X] T017 [P] Add defensive authorization check in `DeleteUserService` to verify owner or admin before allowing delete in `src/services/DeleteUserService.ts`
 
 ### Tests for Second Delivery
 
