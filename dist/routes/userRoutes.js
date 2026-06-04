@@ -4,6 +4,7 @@ exports.userRoutes = void 0;
 const express_1 = require("express");
 const UserController_1 = require("../controllers/UserController");
 const authMiddleware_1 = require("../middlewares/authMiddleware");
+const authorize_1 = require("../middlewares/authorize");
 const userRoutes = (0, express_1.Router)();
 exports.userRoutes = userRoutes;
 const userController = new UserController_1.UserController();
@@ -81,7 +82,7 @@ userRoutes.get("/users/me", authMiddleware_1.authMiddleware, userController.me);
  *       404:
  *         description: Usuário não encontrado
  */
-userRoutes.put("/users/:id", authMiddleware_1.authMiddleware, userController.update);
+userRoutes.put("/users/:id", authMiddleware_1.authMiddleware, (0, authorize_1.ensureOwnerOrRole)('admin'), userController.update);
 /**
  * @swagger
  * /users:
@@ -94,7 +95,7 @@ userRoutes.put("/users/:id", authMiddleware_1.authMiddleware, userController.upd
  *       200:
  *         description: Lista de usuários
  */
-userRoutes.get("/users", authMiddleware_1.authMiddleware, userController.list);
+userRoutes.get("/users", authMiddleware_1.authMiddleware, (0, authorize_1.authorize)('admin'), userController.list);
 /**
  * @swagger
  * /users/{id}:
@@ -117,4 +118,4 @@ userRoutes.get("/users", authMiddleware_1.authMiddleware, userController.list);
  *       404:
  *         description: Usuário não encontrado
  */
-userRoutes.delete("/users/:id", authMiddleware_1.authMiddleware, userController.delete);
+userRoutes.delete("/users/:id", authMiddleware_1.authMiddleware, (0, authorize_1.ensureOwnerOrRole)('admin'), userController.delete);

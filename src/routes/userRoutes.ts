@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { UserController } from "../controllers/UserController";
 import { authMiddleware } from "../middlewares/authMiddleware";
+import { authorize, ensureOwnerOrRole } from "../middlewares/authorize";
 
 const userRoutes = Router();
 const userController = new UserController();
@@ -81,7 +82,7 @@ userRoutes.get("/users/me", authMiddleware, userController.me);
  *       404:
  *         description: Usuário não encontrado
  */
-userRoutes.put("/users/:id", authMiddleware, userController.update);
+userRoutes.put("/users/:id", authMiddleware, ensureOwnerOrRole('admin'), userController.update);
 
 /**
  * @swagger
@@ -95,7 +96,7 @@ userRoutes.put("/users/:id", authMiddleware, userController.update);
  *       200:
  *         description: Lista de usuários
  */
-userRoutes.get("/users", authMiddleware, userController.list);
+userRoutes.get("/users", authMiddleware, authorize('admin'), userController.list);
 
 /**
  * @swagger
@@ -119,6 +120,6 @@ userRoutes.get("/users", authMiddleware, userController.list);
  *       404:
  *         description: Usuário não encontrado
  */
-userRoutes.delete("/users/:id", authMiddleware, userController.delete);
+userRoutes.delete("/users/:id", authMiddleware, ensureOwnerOrRole('admin'), userController.delete);
 
 export { userRoutes };

@@ -52,17 +52,17 @@ description: "Task list for User Authorization RBAC feature implementation in tw
 
 ### Part A: Authorization Middleware
 
-- [ ] T011 Create authorization middleware helper `src/middlewares/authorize.ts` with:
-  - [ ] T011a `authorize(...allowedRoles: string[])` — returns middleware that allows only users with one of the listed roles
-  - [ ] T011b `ensureOwnerOrRole(requiredRole: string)` — returns middleware that allows if `request.params.id == request.user.id` OR `request.user.role == requiredRole`
-  - [ ] T011c Both middleware throw `AppError(403)` when authorization fails
+- [X] T011 Create authorization middleware helper `src/middlewares/authorize.ts` with:
+  - [X] T011a `authorize(...allowedRoles: string[])` — returns middleware that allows only users with one of the listed roles
+  - [X] T011b `ensureOwnerOrRole(requiredRole: string)` — returns middleware that allows if `request.params.id == request.user.id` OR `request.user.role == requiredRole`
+  - [X] T011c Both middleware throw `AppError(403)` when authorization fails
 
 ### Part B: Route Protection
 
-- [ ] T012 [P] Protect `GET /users` with `authorize('admin')` in `src/routes/userRoutes.ts` (admin only)
-- [ ] T013 [P] Protect `PUT /users/:id` with `ensureOwnerOrRole('admin')` in `src/routes/userRoutes.ts` (owner or admin)
-- [ ] T014 [P] Protect `DELETE /users/:id` with `ensureOwnerOrRole('admin')` in `src/routes/userRoutes.ts` (owner or admin)
-- [ ] T015 Leave `GET /users/me` unmodified — accessible to any authenticated user
+- [X] T012 [P] Protect `GET /users` with `authorize('admin')` in `src/routes/userRoutes.ts` (admin only)
+- [X] T013 [P] Protect `PUT /users/:id` with `ensureOwnerOrRole('admin')` in `src/routes/userRoutes.ts` (owner or admin)
+- [X] T014 [P] Protect `DELETE /users/:id` with `ensureOwnerOrRole('admin')` in `src/routes/userRoutes.ts` (owner or admin)
+- [X] T015 Leave `GET /users/me` unmodified — accessible to any authenticated user
 
 ### Part C: Defensive Validation in Services
 
