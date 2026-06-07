@@ -1,6 +1,6 @@
 ---
-description: "Task list for Task Management feature (Phase 4) — T001 to T017"
----
+
+## description: "Task list for Task Management feature (Phase 4) — T001 to T017"
 
 # Tasks: Task Management
 
@@ -164,24 +164,28 @@ Phase 1 (T001)
 
 ### User Story Dependencies
 
-| Story | Tasks | Depende de |
-|-------|-------|------------|
-| US1 Create (P1) | T004, T013 | T002, T003 |
-| US2 List (P1) | T005, T014 | T002 |
-| US3 Get (P1) | T006 | T002 |
-| US4 Update (P2) | T007, T015 | T002, T003 |
-| US5 Delete (P2) | T008, T016 | T002 |
-| Cross-cutting | T009–T012, T017 | T004–T008, T003 |
+
+| Story           | Tasks           | Depende de      |
+| --------------- | --------------- | --------------- |
+| US1 Create (P1) | T004, T013      | T002, T003      |
+| US2 List (P1)   | T005, T014      | T002            |
+| US3 Get (P1)    | T006            | T002            |
+| US4 Update (P2) | T007, T015      | T002, T003      |
+| US5 Delete (P2) | T008, T016      | T002            |
+| Cross-cutting   | T009–T012, T017 | T004–T008, T003 |
+
 
 ### Parallel Opportunities
 
-| Grupo | Tasks | Condição |
-|-------|-------|----------|
-| Foundational | T002, T003 | Após T001 |
-| Services (parcial) | T004, T005, T006 | Após T002+T003; arquivos distintos |
-| Services (parcial) | T007, T008 | Após T002+T003; paralelo entre si |
-| Testes por story | T013, T014, T015, T016 | Após service correspondente + T009/T010 para HTTP |
-| Swagger | T012 | Paralelo a T017 após T010 |
+
+| Grupo              | Tasks                  | Condição                                          |
+| ------------------ | ---------------------- | ------------------------------------------------- |
+| Foundational       | T002, T003             | Após T001                                         |
+| Services (parcial) | T004, T005, T006       | Após T002+T003; arquivos distintos                |
+| Services (parcial) | T007, T008             | Após T002+T003; paralelo entre si                 |
+| Testes por story   | T013, T014, T015, T016 | Após service correspondente + T009/T010 para HTTP |
+| Swagger            | T012                   | Paralelo a T017 após T010                         |
+
 
 ### Parallel Example: Foundational
 
@@ -233,25 +237,27 @@ docker compose down && docker compose build --no-cache && docker compose up -d
 
 ## Task Summary
 
-| ID | Story | Descrição | Arquivo principal |
-|----|-------|-----------|-------------------|
-| T001 | — | Migration align-tasks-schema | `migrations/<timestamp>_align-tasks-schema.js` |
-| T002 | — | TaskRepository | `src/repositories/TaskRepository.ts` |
-| T003 | — | DTOs Zod | `src/modules/tasks/dto/` |
-| T004 | US1 | CreateTaskService | `src/services/CreateTaskService.ts` |
-| T005 | US2 | ListTasksService | `src/services/ListTasksService.ts` |
-| T006 | US3 | GetTaskByIdService | `src/services/GetTaskByIdService.ts` |
-| T007 | US4 | UpdateTaskService | `src/services/UpdateTaskService.ts` |
-| T008 | US5 | DeleteTaskService | `src/services/DeleteTaskService.ts` |
-| T009 | — | TaskController | `src/controllers/TaskController.ts` |
-| T010 | — | Rotas /tasks | `src/routes/taskRoutes.ts` |
-| T011 | — | Regras owner/admin | `src/services/GetTaskByIdService.ts`, `UpdateTaskService.ts`, `DeleteTaskService.ts` |
-| T012 | — | Swagger | `src/routes/taskRoutes.ts` |
-| T013 | US1 | Testes criação | `src/tests/tasks.integration.test.ts` |
-| T014 | US2 | Testes listagem | `src/tests/tasks.integration.test.ts` |
-| T015 | US4 | Testes atualização | `src/tests/tasks.integration.test.ts` |
-| T016 | US5 | Testes exclusão | `src/tests/tasks.integration.test.ts` |
-| T017 | — | Testes autorização | `src/tests/tasks.integration.test.ts` |
+
+| ID   | Story | Descrição                    | Arquivo principal                                                                    |
+| ---- | ----- | ---------------------------- | ------------------------------------------------------------------------------------ |
+| T001 | —     | Migration align-tasks-schema | `migrations/<timestamp>_align-tasks-schema.js`                                       |
+| T002 | —     | TaskRepository               | `src/repositories/TaskRepository.ts`                                                 |
+| T003 | —     | DTOs Zod                     | `src/modules/tasks/dto/`                                                             |
+| T004 | US1   | CreateTaskService            | `src/services/CreateTaskService.ts`                                                  |
+| T005 | US2   | ListTasksService             | `src/services/ListTasksService.ts`                                                   |
+| T006 | US3   | GetTaskByIdService           | `src/services/GetTaskByIdService.ts`                                                 |
+| T007 | US4   | UpdateTaskService            | `src/services/UpdateTaskService.ts`                                                  |
+| T008 | US5   | DeleteTaskService            | `src/services/DeleteTaskService.ts`                                                  |
+| T009 | —     | TaskController               | `src/controllers/TaskController.ts`                                                  |
+| T010 | —     | Rotas /tasks                 | `src/routes/taskRoutes.ts`                                                           |
+| T011 | —     | Regras owner/admin           | `src/services/GetTaskByIdService.ts`, `UpdateTaskService.ts`, `DeleteTaskService.ts` |
+| T012 | —     | Swagger                      | `src/routes/taskRoutes.ts`                                                           |
+| T013 | US1   | Testes criação               | `src/tests/tasks.integration.test.ts`                                                |
+| T014 | US2   | Testes listagem              | `src/tests/tasks.integration.test.ts`                                                |
+| T015 | US4   | Testes atualização           | `src/tests/tasks.integration.test.ts`                                                |
+| T016 | US5   | Testes exclusão              | `src/tests/tasks.integration.test.ts`                                                |
+| T017 | —     | Testes autorização           | `src/tests/tasks.integration.test.ts`                                                |
+
 
 **Total**: 17 tasks (T001–T017)
 
@@ -263,3 +269,4 @@ docker compose down && docker compose build --no-cache && docker compose up -d
 - JWT nos testes: gerar diretamente com `jwt.sign` (padrão `src/tests/rbac.integration.test.ts`)
 - T011 deve centralizar autorização nos services; controller não deve duplicar lógica de owner
 - Commit após cada task ou grupo lógico; validar build antes de avançar (constituição do projeto)
+
