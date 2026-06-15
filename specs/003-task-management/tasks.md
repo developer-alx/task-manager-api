@@ -23,7 +23,7 @@
 
 **Checkpoint**: Migration aplicada; tabela `tasks` compatível com [data-model.md](./data-model.md)
 
-- [ ] T001 Criar migration `align-tasks-schema` em `migrations/<timestamp>_align-tasks-schema.js` (remover `completed`, adicionar `status` com default `pending` e check constraint, adicionar `updated_at`) e aplicar com `npm run migrate:up`
+- [X] T001 Criar migration `align-tasks-schema` em `migrations/<timestamp>_align-tasks-schema.js` (remover `completed`, adicionar `status` com default `pending` e check constraint, adicionar `updated_at`) e aplicar com `npm run migrate:up`
 
 ---
 
