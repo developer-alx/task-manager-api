@@ -1,3 +1,39 @@
+# Task Manager API
+
+API REST para gerenciamento de tarefas desenvolvida com Node.js, TypeScript, Express e PostgreSQL.
+
+## Status
+
+🚧 Em desenvolvimento ativo
+
+## Funcionalidades implementadas
+
+- Autenticação com JWT
+- CRUD de usuários
+- CRUD de tarefas
+- Controle de acesso (RBAC)
+- PostgreSQL
+- Migrations
+- Docker Compose
+- Swagger
+- Arquitetura em camadas
+
+## Stack
+
+- Node.js
+- TypeScript
+- Express
+- PostgreSQL
+- Docker
+- JWT
+- Zod
+- Winston
+
+---
+
+# Task Manager API — Architecture Blueprint
+
+
 # Task Manager API — Architecture Blueprint
 
 ## 1. Visão Geral do Projeto
