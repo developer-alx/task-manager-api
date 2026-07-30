@@ -33,9 +33,6 @@ API REST para gerenciamento de tarefas desenvolvida com Node.js, TypeScript, Exp
 
 # Task Manager API — Architecture Blueprint
 
-
-# Task Manager API — Architecture Blueprint
-
 ## 1. Visão Geral do Projeto
 
 Este projeto consiste em uma **API profissional de gerenciamento de tarefas**, construída com foco em:
